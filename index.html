@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cardápio | Sorelly Crepe Francês</title>
+<meta name="description" content="Cardápio digital da Sorelly, crepe francês em Sorocaba. Crepes salgados, especiais e doces, saladas, patês, molhos e bebidas.">
+
+<style>
+:root {
+  --gold: #c49a61;
+  --dark: #171713;
+  --cream: #f8f4ed;
+  --sand: #efe8dc;
+  --text: #34312c;
+  --nav-h: 64px;
+}
+* { box-sizing: border-box; margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Arial, sans-serif;
+  color: var(--text);
+  background: var(--sand);
+}
+
+/* ===== CAPA ===== */
+.logo {
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 34px;
+  letter-spacing: 8px;
+}
+.cover {
+  position: relative;
+  min-height: min(88vh, 780px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 8% 130px;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--dark);
+}
+.cover-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1800&q=80') center/cover;
+  animation: kenburns 24s ease-in-out infinite alternate;
+}
+.cover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at center, rgba(23,23,19,.5) 0%, rgba(23,23,19,.9) 75%),
+    linear-gradient(180deg, rgba(23,23,19,.35), rgba(23,23,19,.85));
+}
+.cover-frame {
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(196,154,97,.35);
+  pointer-events: none;
+}
+.cover-frame::before,
+.cover-frame::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--gold);
+}
+.cover-frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.cover-frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+
+.cover-inner > * { animation: fadeUp .9s ease both; animation-delay: var(--d, 0s); }
+.cover-crest {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 18px;
+  padding: 12px;
+  border: 1px solid rgba(196,154,97,.5);
+  border-radius: 50%;
+  background: rgba(23,23,19,.45);
+  overflow: visible;
+}
+.cover-crest .crepe { animation: float 3s ease-in-out infinite; }
+.cover-crest * { transform-box: fill-box; transform-origin: center; }
+.cover-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.cover-logo::before,
+.cover-logo::after {
+  content: "";
+  width: 54px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold));
+}
+.cover-logo::after { background: linear-gradient(90deg, var(--gold), transparent); }
+.eyebrow {
+  display: block;
+  color: #d9c7a8;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.cover h1 {
+  font: italic clamp(60px, 12vw, 120px) Georgia, serif;
+  line-height: 1;
+  margin: 26px 0 18px;
+  color: #fff;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .cover h1 {
+    background: linear-gradient(100deg, #fff 30%, #f1d9a8 44%, #c49a61 50%, #f1d9a8 56%, #fff 70%);
+    background-size: 250% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0 .1em .08em;
+    animation: fadeUp .9s ease var(--d) both, shimmer 7s ease-in-out 2s infinite;
+  }
+}
+@keyframes shimmer { 0% { background-position: 100% 0; } 55%, 100% { background-position: 0 0; } }
+.cover p {
+  color: #e2dcd2;
+  font-size: 18px;
+  line-height: 1.6;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.cover-stats {
+  display: flex;
+  justify-content: center;
+  margin: 38px auto 0;
+  max-width: 600px;
+  border-top: 1px solid rgba(196,154,97,.3);
+  border-bottom: 1px solid rgba(196,154,97,.3);
+}
+.cover-stats div { flex: 1; padding: 18px 12px; }
+.cover-stats div + div { border-left: 1px solid rgba(196,154,97,.3); }
+.cover-stats strong {
+  display: block;
+  font: 34px Georgia, serif;
+  color: var(--gold);
+}
+.cover-stats span {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #cfc6b6;
+}
+.scroll-cue {
+  position: absolute;
+  bottom: 44px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: #d9c7a8;
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  animation: fadeUp .9s ease .9s both;
+}
+.scroll-cue i {
+  width: 22px;
+  height: 34px;
+  border: 1.5px solid var(--gold);
+  border-radius: 12px;
+  position: relative;
+}
+.scroll-cue i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 7px;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: var(--gold);
+  animation: wheel 1.8s ease-in-out infinite;
+}
+@keyframes wheel { 0% { opacity: 0; transform: translateY(0); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateY(12px); } }
+.spark {
+  position: absolute;
+  z-index: -1;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 8px var(--gold);
+  opacity: 0;
+  animation: rise 10s linear infinite;
+}
+@keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .8; } 100% { transform: translateY(-60vh); opacity: 0; } }
+
+/* ===== MENU DE CATEGORIAS FIXO ===== */
+.menu-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding: 13px 16px;
+  background: rgba(248,244,237,.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid #e3d8c6;
+  box-shadow: 0 4px 18px #0000000a;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.menu-nav::-webkit-scrollbar { display: none; }
+.menu-nav a {
+  flex-shrink: 0;
+  border: 1px solid var(--gold);
+  color: var(--text);
+  padding: 9px 17px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: .25s;
+}
+.menu-nav a:hover,
+.menu-nav a.active { background: var(--gold); color: var(--dark); }
+
+/* ===== CARDÁPIO ===== */
+.menu-section { padding: 50px 8% 70px; }
+.menu-block {
+  background: white;
+  border-radius: 8px;
+  padding: 42px;
+  margin: 0 auto 30px;
+  max-width: 1100px;
+  box-shadow: 0 5px 25px #0000000d;
+  scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+.block-head {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid #eee3d2;
+  padding-bottom: 14px;
+  margin-bottom: 6px;
+}
+.block-head h3 { font: 30px Georgia, serif; }
+.block-head h3 span {
+  display: block;
+  color: var(--gold);
+  font: 11px Arial, sans-serif;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.menu-note {
+  color: #9a8f80;
+  font-size: 14px;
+  font-style: italic;
+  margin: 14px 0 10px;
+}
+.menu-list {
+  list-style: none;
+  padding: 0;
+  columns: 2 300px;
+  column-gap: 50px;
+}
+.menu-list li {
+  break-inside: avoid;
+  padding: 13px 0 13px 20px;
+  border-bottom: 1px dashed #e6dfd3;
+  line-height: 1.5;
+  position: relative;
+  transition: padding-left .25s ease, color .25s ease;
+}
+.menu-list li:hover { padding-left: 26px; color: var(--dark); }
+.menu-list li::before {
+  content: "◆";
+  color: var(--gold);
+  font-size: 9px;
+  position: absolute;
+  left: 0;
+  top: 18px;
+}
+.menu-list li small {
+  display: block;
+  color: #999;
+  font-size: 13px;
+  margin-top: 3px;
+}
+.menu-sub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin-top: 26px;
+}
+.menu-sub h4 {
+  color: var(--gold);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 14px;
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+}
+.chips li {
+  background: var(--cream);
+  border: 1px solid #eee3d2;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  transition: background .25s, transform .25s;
+}
+.chips li:hover { background: var(--gold); transform: translateY(-2px); }
+.menu-pair {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.menu-pair .menu-block { margin: 0; }
+.menu-pair .menu-list { columns: 1; }
+
+/* fotos com movimento */
+.menu-photo {
+  height: 240px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 24px 0 8px;
+}
+.menu-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kenburns 16s ease-in-out infinite alternate;
+}
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.12) translate(-2%, -2%); } }
+
+/* ===== RODAPÉ ===== */
+footer {
+  padding: 45px 8%;
+  background: var(--dark);
+  color: #ccc;
+  text-align: center;
+  line-height: 2;
+}
+footer .logo { font-size: 26px; margin-bottom: 8px; }
+footer small { color: #888; }
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+.js .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
+.js .reveal.visible { opacity: 1; transform: none; }
+.js .menu-list li, .js .chips li { opacity: 0; }
+.visible .menu-list li, .visible .chips li {
+  animation: fadeUp .5s ease both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* ilustrações */
+.menu-icon {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  background: var(--cream);
+  border-radius: 50%;
+  padding: 8px;
+  overflow: visible;
+}
+.menu-icon * { transform-box: fill-box; transform-origin: center; }
+@keyframes steam { 0% { opacity: 0; transform: translateY(4px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-8px); } }
+@keyframes twinkle { 0%,100% { transform: scale(.6) rotate(0); opacity: .5; } 50% { transform: scale(1.15) rotate(45deg); opacity: 1; } }
+@keyframes drip { 0% { transform: translateY(-4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(12px); opacity: 0; } }
+@keyframes sway { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-6deg); } }
+@keyframes tilt { 0%,70%,100% { transform: rotate(0); } 35% { transform: rotate(15deg); } }
+@keyframes bubble { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-18px); opacity: 0; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.steam { animation: steam 2.4s ease-in-out infinite; }
+.twinkle { animation: twinkle 2.2s ease-in-out infinite; }
+.drip { animation: drip 1.8s ease-in infinite; }
+.sway { animation: sway 3s ease-in-out infinite; transform-origin: center bottom; }
+.bob { animation: bob 2.6s ease-in-out infinite; }
+.tilt { animation: tilt 3.2s ease-in-out infinite; transform-origin: center bottom; }
+.bubble { animation: bubble 2s ease-in infinite; }
+.float { animation: float 2.4s ease-in-out infinite; }
+.d1 { animation-delay: .6s; }
+.d2 { animation-delay: 1.2s; }
+
+@media (max-width: 760px) {
+  .menu-nav { justify-content: flex-start; }
+}
+@media (max-width: 600px) {
+  :root { --nav-h: 58px; }
+  .cover { min-height: 92vh; padding: 60px 7% 120px; }
+  .cover-frame { inset: 12px; }
+  .cover-crest { width: 76px; height: 76px; padding: 10px; }
+  .cover-logo { gap: 12px; }
+  .cover-logo::before, .cover-logo::after { width: 30px; }
+  .logo { font-size: 28px; letter-spacing: 6px; }
+  .cover p { font-size: 16px; }
+  .cover-stats { margin-top: 30px; }
+  .cover-stats div { padding: 14px 6px; }
+  .cover-stats strong { font-size: 26px; }
+  .cover-stats span { font-size: 9px; letter-spacing: 1px; }
+  .scroll-cue { bottom: 30px; }
+  .menu-nav { padding: 11px 16px; }
+  .menu-section { padding: 30px 16px 50px; }
+  .menu-block { padding: 28px 20px; }
+  .block-head { gap: 14px; }
+  .block-head h3 { font-size: 26px; }
+  .menu-pair { grid-template-columns: 1fr; }
+  .menu-icon { width: 58px; height: 58px; padding: 6px; }
+  .menu-photo { height: 180px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .js .reveal, .js .menu-list li, .js .chips li { opacity: 1; transform: none; }
+}
+</style>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+
+<body>
+
+<!-- ===== CAPA ===== -->
+<header class="cover">
+  <div class="cover-bg" aria-hidden="true"></div>
+  <div class="cover-frame" aria-hidden="true"></div>
+  <span class="spark" style="left:12%;bottom:8%;animation-delay:0s" aria-hidden="true"></span>
+  <span class="spark" style="left:26%;bottom:2%;animation-delay:3.2s" aria-hidden="true"></span>
+  <span class="spark" style="left:44%;bottom:12%;animation-delay:6s" aria-hidden="true"></span>
+  <span class="spark" style="left:63%;bottom:4%;animation-delay:1.6s" aria-hidden="true"></span>
+  <span class="spark" style="left:78%;bottom:10%;animation-delay:4.6s" aria-hidden="true"></span>
+  <span class="spark" style="left:90%;bottom:3%;animation-delay:7.4s" aria-hidden="true"></span>
+
+  <div class="cover-inner">
+    <svg class="cover-crest" viewBox="0 0 64 64" aria-hidden="true" style="--d:0s">
+      <path class="steam" d="M24 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+      <path class="steam d1" d="M32 16 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+      <path class="steam d2" d="M40 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+      <g class="crepe">
+        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M19 47 Q32 36 45 47" fill="none" stroke="#c49a61" stroke-width="1.5"/>
+        <path d="M18 44 q3 -3 6 0 t6 0 t6 0 t6 0" fill="none" stroke="#6b4226" stroke-width="2" stroke-linecap="round"/>
+      </g>
+    </svg>
+    <div class="cover-logo logo" style="--d:.1s">SORELLY</div>
+    <span class="eyebrow" style="--d:.2s">Crepe Francês • Sorocaba</span>
+    <h1 style="--d:.3s">Cardápio</h1>
+    <p style="--d:.45s">Crepes salgados e doces, saladas, patês, molhos e bebidas.</p>
+    <div class="cover-stats" style="--d:.6s">
+      <div><strong data-count="32">32</strong><span>Salgados</span></div>
+      <div><strong data-count="17">17</strong><span>Doces</span></div>
+      <div><strong data-count="20">20</strong><span>Itens de salada</span></div>
+    </div>
+  </div>
+
+  <a class="scroll-cue" href="#salgados"><i></i>Ver cardápio</a>
+</header>
+
+<!-- ===== CATEGORIAS ===== -->
+<nav class="menu-nav" aria-label="Categorias do cardápio">
+  <a href="#salgados">Crepes Salgados</a>
+  <a href="#especiais">Salgados Especiais</a>
+  <a href="#doces">Crepes Doces</a>
+  <a href="#saladas">Saladas</a>
+  <a href="#pates">Patês</a>
+  <a href="#molhos">Molhos</a>
+  <a href="#bebidas">Bebidas</a>
+</nav>
+
+<main class="menu-section">
+
+  <!-- Crepes Salgados -->
+  <section class="menu-block reveal" id="salgados">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="steam" d="M24 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d1" d="M32 16 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d2" d="M40 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M19 47 Q32 36 45 47" fill="none" stroke="#c49a61" stroke-width="1.5"/>
+        <circle cx="27" cy="41" r="2.2" fill="#d9534f"/>
+        <circle cx="36" cy="39" r="2.2" fill="#7fa652"/>
+      </svg>
+      <h3><span>Crepes</span>Crepes Salgados</h3>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1400&q=80" alt="Crepe salgado" loading="lazy">
+    </div>
+    <p class="menu-note">Todos acompanham queijo mussarela.</p>
+    <ul class="menu-list">
+      <li>Calabresa com tomate, mussarela e orégano</li>
+      <li>Calabresa com tomate, mussarela, orégano e cebola</li>
+      <li>Frango com catupiry e mussarela<small>Com brócolis ou milho</small></li>
+      <li>Frango com champignon ao molho bechamel e parmesão</li>
+      <li>Frango com creme de milho e provolone<small>Ou parmesão</small></li>
+      <li>Frango com creme de milho ao molho bechamel e mussarela</li>
+      <li>Frango ao curry, catupiry, passas e maçã</li>
+      <li>Gorgonzola com pera e mel</li>
+      <li>Quatro queijos com manjericão</li>
+      <li>Queijo minas, tomate seco e castanha</li>
+      <li>Queijo minas, tomate e orégano</li>
+      <li>Mussarela, rúcula e tomate seco</li>
+      <li>Catupiry, palmito e tomate seco</li>
+      <li>Escarola, bacon e mussarela</li>
+      <li>Escarola e mussarela ao molho bechamel</li>
+      <li>Suflê de escarola, mussarela e parmesão</li>
+      <li>Creme de espinafre com bacon</li>
+      <li>Brócolis, bacon, mussarela e catupiry</li>
+      <li>Presunto, mussarela, tomate e orégano</li>
+    </ul>
+  </section>
+
+  <!-- Salgados Especiais -->
+  <section class="menu-block reveal" id="especiais">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M19 47 Q32 36 45 47" fill="none" stroke="#c49a61" stroke-width="1.5"/>
+        <path d="M28 40 q4 -6 8 0" fill="none" stroke="#e8833a" stroke-width="3" stroke-linecap="round"/>
+        <path class="twinkle" d="M50 4 L52.5 9.5 L58 12 L52.5 14.5 L50 20 L47.5 14.5 L42 12 L47.5 9.5 Z" fill="#c49a61"/>
+        <path class="twinkle d2" d="M14 12 L15.5 16.5 L20 18 L15.5 19.5 L14 24 L12.5 19.5 L8 18 L12.5 16.5 Z" fill="#c49a61"/>
+      </svg>
+      <h3><span>Crepes</span>Salgados Especiais</h3>
+    </div>
+    <ul class="menu-list">
+      <li>Alcatra ou maminha com molho barbecue</li>
+      <li>Peito de peru, mussarela e cenoura<small>Ou presunto</small></li>
+      <li>Shimeji, mussarela e mostarda francesa</li>
+      <li>Shimeji, presunto, mussarela e molho bechamel</li>
+      <li>Shimeji com mussarela e tomate seco</li>
+      <li>Camarão ao molho Sorelly</li>
+      <li>Camarão ao molho bechamel</li>
+      <li>Camarão com abóbora e queijo parmesão</li>
+      <li>Carne seca com banana e catupiry<small>Ou mussarela</small></li>
+      <li>Carne seca com abóbora e catupiry</li>
+      <li>Escondidinho de carne seca com purê de mandioca</li>
+      <li>Strogonoff de carne bovina</li>
+      <li>Strogonoff de frango</li>
+    </ul>
+  </section>
+
+  <!-- Crepes Doces -->
+  <section class="menu-block reveal" id="doces">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="drip" d="M29 6 q3 5 0 7 q-3 -2 0 -7 Z" fill="#6b4226"/>
+        <path class="drip d1" d="M36 8 q3 5 0 7 q-3 -2 0 -7 Z" fill="#6b4226"/>
+        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M18 44 q3 -3 6 0 t6 0 t6 0 t6 0" fill="none" stroke="#6b4226" stroke-width="2.5" stroke-linecap="round"/>
+        <g class="float">
+          <path d="M48 22 q6 0 6 6 q-2 6 -6 8 q-4 -2 -6 -8 q0 -6 6 -6 Z" fill="#d9534f"/>
+          <path d="M45 22 l3 -3 l3 3" fill="none" stroke="#7fa652" stroke-width="2" stroke-linecap="round"/>
+        </g>
+      </svg>
+      <h3><span>Crepes</span>Crepes Doces</h3>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=1400&q=80" alt="Crepe doce" loading="lazy">
+    </div>
+    <ul class="menu-list">
+      <li>Chocolate com castanha</li>
+      <li>Chocolate com morango</li>
+      <li>Brigadeiro com morango</li>
+      <li>Nutella com maçã e canela</li>
+      <li>Chocolate branco com nozes e maçã</li>
+      <li>Chocolate branco com maçã e banana</li>
+      <li>Chocolate branco com pera</li>
+      <li>Geleia de laranja com chocolate branco</li>
+      <li>Mel com nozes</li>
+      <li>Suzete<small>Geleia de laranja ou suco de limão flambado ao Cointreau — ou geleia de pera flambada ao Cointreau com castanhas e passas</small></li>
+      <li>Doce de leite com castanha</li>
+      <li>Goiabada com queijo fresco</li>
+      <li>Banana com canela</li>
+      <li>Abacaxi flambado ao rum</li>
+      <li>Beijinho</li>
+      <li>Prestígio<small>Chocolate, coco ralado e leite condensado</small></li>
+      <li>Creme de amendoim</li>
+    </ul>
+  </section>
+
+  <!-- Saladas -->
+  <section class="menu-block reveal" id="saladas">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <g class="sway"><ellipse cx="22" cy="26" rx="7" ry="12" fill="#7fa652" transform="rotate(-25 22 26)"/></g>
+        <g class="sway d1"><ellipse cx="32" cy="22" rx="6" ry="13" fill="#9cc26a"/></g>
+        <g class="sway d2"><ellipse cx="42" cy="26" rx="7" ry="12" fill="#6c9445" transform="rotate(25 42 26)"/></g>
+        <circle cx="27" cy="32" r="4" fill="#d9534f"/>
+        <circle cx="39" cy="31" r="3.5" fill="#e8833a"/>
+        <path d="M8 34 H56 Q54 54 32 54 Q10 54 8 34 Z" fill="#ffffff" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <h3><span>Monte a sua</span>Saladas</h3>
+    </div>
+    <p class="menu-note">Escolha seus ingredientes favoritos.</p>
+    <div class="menu-sub-grid">
+      <div class="menu-sub">
+        <h4>Folhas</h4>
+        <ul class="chips">
+          <li>Alface americana</li>
+          <li>Alface crespa</li>
+          <li>Alface lisa</li>
+          <li>Rúcula</li>
+          <li>Acelga fatiada</li>
+        </ul>
+      </div>
+      <div class="menu-sub">
+        <h4>Legumes</h4>
+        <ul class="chips">
+          <li>Pepino</li>
+          <li>Brócolis japonês</li>
+          <li>Cenoura ralada</li>
+          <li>Beterraba ralada</li>
+          <li>Tomate fatiado</li>
+          <li>Tomate cereja</li>
+          <li>Tomate seco</li>
+          <li>Palmito</li>
+        </ul>
+      </div>
+      <div class="menu-sub">
+        <h4>Complementos</h4>
+        <ul class="chips">
+          <li>Mussarela de búfala ralada</li>
+          <li>Kani</li>
+          <li>Presunto fatiado</li>
+          <li>Batata palha</li>
+        </ul>
+      </div>
+      <div class="menu-sub">
+        <h4>Frutas</h4>
+        <ul class="chips">
+          <li>Manga</li>
+          <li>Kiwi</li>
+          <li>Carambola</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Patês -->
+  <section class="menu-block reveal" id="pates">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M18 29 H46 V50 Q46 55 41 55 H23 Q18 55 18 50 Z" fill="#f8f4ed" stroke="#c49a61" stroke-width="2"/>
+        <rect x="21" y="33" width="22" height="18" rx="2" fill="#e9c9a0"/>
+        <rect x="16" y="23" width="32" height="7" rx="2" fill="#c49a61"/>
+        <g class="bob">
+          <path d="M10 8 L20 13" stroke="#34312c" stroke-width="5" stroke-linecap="round"/>
+          <path d="M20 13 L42 18" stroke="#b8bcc0" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="42" cy="18" r="3" fill="#e9c9a0"/>
+        </g>
+      </svg>
+      <h3><span>Para acompanhar</span>Patês e Antepastos</h3>
+    </div>
+    <ul class="menu-list">
+      <li>Antepasto de berinjela</li>
+      <li>Patê de ricota com tomate seco<small>Opcional: salsinha e cebolinha</small></li>
+      <li>Patê de requeijão com brócolis<small>Ou catupiry</small></li>
+      <li>Patê de azeitona preta<small>Ou de ervas</small></li>
+      <li>Patê de peito de peru com ricota</li>
+      <li>Patê de presunto com cream cheese</li>
+    </ul>
+  </section>
+
+  <!-- Molhos + Bebidas -->
+  <div class="menu-pair">
+    <section class="menu-block reveal" id="molhos">
+      <div class="block-head">
+        <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+          <g class="tilt">
+            <rect x="28" y="8" width="8" height="10" rx="1" fill="#c49a61"/>
+            <path d="M24 18 H40 Q44 22 44 28 V52 Q44 56 40 56 H24 Q20 56 20 52 V28 Q20 22 24 18 Z" fill="#ffffff" stroke="#c49a61" stroke-width="2"/>
+            <rect x="22" y="32" width="20" height="12" rx="1" fill="#f1d9a8"/>
+          </g>
+          <path class="drip" d="M52 20 q3 5 0 7 q-3 -2 0 -7 Z" fill="#e8833a"/>
+        </svg>
+        <h3><span>Para a salada</span>Molhos</h3>
+      </div>
+      <ul class="menu-list">
+        <li>Parmesão</li>
+        <li>Mostarda francesa</li>
+        <li>Shoyu</li>
+        <li>Limão e azeite</li>
+        <li>Italiano</li>
+        <li>Rosé</li>
+        <li>Caesar</li>
+        <li>Mostarda e mel</li>
+        <li>Iogurte e ervas</li>
+      </ul>
+    </section>
+
+    <section class="menu-block reveal" id="bebidas">
+      <div class="block-head">
+        <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+          <path d="M38 4 L34 40" stroke="#d9534f" stroke-width="3" stroke-linecap="round"/>
+          <path d="M19.5 28 H44.5 L42 56 H22 Z" fill="#6b3a22" opacity=".85"/>
+          <circle class="bubble" cx="27" cy="50" r="1.6" fill="#ffffff"/>
+          <circle class="bubble d1" cx="32" cy="52" r="1.3" fill="#ffffff"/>
+          <circle class="bubble d2" cx="37" cy="49" r="1.6" fill="#ffffff"/>
+          <path d="M18 16 H46 L42 56 H22 Z" fill="none" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        </svg>
+        <h3><span>Para refrescar</span>Bebidas</h3>
+      </div>
+      <ul class="menu-list">
+        <li>Coca-Cola e Coca-Cola Zero</li>
+        <li>Guaraná e Guaraná Zero</li>
+        <li>Sprite e Sprite Zero</li>
+        <li>Água com e sem gás</li>
+      </ul>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="logo">SORELLY</div>
+  <p>Crepe Francês em Sorocaba</p>
+  <p>Rua Nelson Antunes Gatto, 147</p>
+  <p>(15) 98800-7612</p>
+  <p><small>© Sorelly. Todos os direitos reservados.</small></p>
+</footer>
+
+<script>
+(function () {
+  // numera os itens para a animação em cascata
+  document.querySelectorAll('.menu-list, .chips').forEach(function (list) {
+    list.querySelectorAll('li').forEach(function (li, i) {
+      li.style.setProperty('--i', i);
+    });
+  });
+
+  // números da capa contando
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      var end = +el.dataset.count, start = null, dur = 1400;
+      el.textContent = '0';
+      function step(t) {
+        if (!start) start = t;
+        var p = Math.min((t - start) / dur, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) requestAnimationFrame(step);
+      }
+      setTimeout(function () { requestAnimationFrame(step); }, 700);
+    });
+  }
+
+  var reveals = document.querySelectorAll('.reveal');
+  var nav = document.querySelector('.menu-nav');
+  var links = nav.querySelectorAll('a');
+
+  if (!('IntersectionObserver' in window)) {
+    reveals.forEach(function (el) { el.classList.add('visible'); });
+    return;
+  }
+
+  // entrada ao rolar
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(function (el) { io.observe(el); });
+
+  // destaca a categoria que está na tela
+  var spy = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+      links.forEach(function (a) {
+        var on = a.getAttribute('href') === '#' + entry.target.id;
+        a.classList.toggle('active', on);
+        if (on && nav.scrollWidth > nav.clientWidth) {
+          nav.scrollTo({ left: a.offsetLeft - 16, behavior: 'smooth' });
+        }
+      });
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('.menu-block').forEach(function (b) { spy.observe(b); });
+})();
+</script>
+</body>
+</html>
