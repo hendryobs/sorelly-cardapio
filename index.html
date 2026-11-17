@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cardápio | Sorelly Crepe Francês</title>
-<meta name="description" content="Cardápio digital da Sorelly, crepe francês em Sorocaba. Crepes salgados, especiais e doces, saladas, patês, molhos e bebidas.">
+<title>Cardápios | Sorelly</title>
+<meta name="description" content="Cardápios da Sorelly em Sorocaba: coquetel, comida de boteco, massa show, rodízio de pizzas, feijoada, churrasco e crepe francês, com valores por pessoa.">
 
 <style>
 :root {
   --gold: #c49a61;
+  --gold-dark: #94682f;
   --dark: #171713;
   --cream: #f8f4ed;
   --sand: #efe8dc;
@@ -47,7 +48,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1800&q=80') center/cover;
+  background: url('https://images.unsplash.com/photo-1565087170449-fa23854a6100?auto=format&fit=crop&w=1800&q=80') center/cover;
   animation: kenburns 24s ease-in-out infinite alternate;
 }
 .cover::before {
@@ -56,8 +57,8 @@ body {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse at center, rgba(23,23,19,.5) 0%, rgba(23,23,19,.9) 75%),
-    linear-gradient(180deg, rgba(23,23,19,.35), rgba(23,23,19,.85));
+    radial-gradient(ellipse at center, rgba(23,23,19,.7) 0%, rgba(23,23,19,.95) 75%),
+    linear-gradient(180deg, rgba(23,23,19,.5), rgba(23,23,19,.9));
 }
 .cover-frame {
   position: absolute;
@@ -112,7 +113,7 @@ body {
   margin-top: 12px;
 }
 .cover h1 {
-  font: italic clamp(60px, 12vw, 120px) Georgia, serif;
+  font: italic clamp(56px, 12vw, 120px) Georgia, serif;
   line-height: 1;
   margin: 26px 0 18px;
   color: #fff;
@@ -141,7 +142,7 @@ body {
   display: flex;
   justify-content: center;
   margin: 38px auto 0;
-  max-width: 600px;
+  max-width: 440px;
   border-top: 1px solid rgba(196,154,97,.3);
   border-bottom: 1px solid rgba(196,154,97,.3);
 }
@@ -209,14 +210,13 @@ body {
 }
 @keyframes rise { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .8; } 100% { transform: translateY(-60vh); opacity: 0; } }
 
-/* ===== MENU DE CATEGORIAS FIXO ===== */
+/* ===== MENU DE CARDÁPIOS FIXO ===== */
 .menu-nav {
   position: sticky;
   top: 0;
   z-index: 20;
   display: flex;
   gap: 10px;
-  justify-content: center;
   padding: 13px 16px;
   background: rgba(248,244,237,.94);
   backdrop-filter: blur(8px);
@@ -240,11 +240,53 @@ body {
   white-space: nowrap;
   transition: .25s;
 }
+.menu-nav a:first-child { margin-left: auto; }
+.menu-nav a:last-child { margin-right: auto; }
 .menu-nav a:hover,
 .menu-nav a.active { background: var(--gold); color: var(--dark); }
 
-/* ===== CARDÁPIO ===== */
-.menu-section { padding: 50px 8% 70px; }
+/* ===== RESUMO DOS CARDÁPIOS ===== */
+.menu-section { padding: 60px 8% 70px; }
+.overview {
+  max-width: 1100px;
+  margin: 0 auto 50px;
+  text-align: center;
+  scroll-margin-top: calc(var(--nav-h) + 20px);
+}
+.overview .eyebrow { color: var(--gold-dark); margin: 0; }
+.overview h2 { font: 40px Georgia, serif; margin: 12px 0 10px; }
+.overview > p { color: #777; margin-bottom: 34px; }
+.ov-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(235px, 1fr));
+  gap: 18px;
+  text-align: left;
+}
+.ov-card {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 8px;
+  padding: 24px;
+  color: inherit;
+  text-decoration: none;
+  border-top: 3px solid var(--gold);
+  box-shadow: 0 5px 25px #0000000d;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.ov-card:hover { transform: translateY(-6px); box-shadow: 0 14px 35px #0000001a; }
+.ov-card h3 { font: 22px Georgia, serif; margin-bottom: 8px; }
+.ov-card p { color: #777; font-size: 14px; line-height: 1.55; flex: 1; }
+.ov-price {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px dashed #e6dfd3;
+}
+.ov-price strong { font: 24px Georgia, serif; color: var(--gold-dark); }
+.ov-price span { font-size: 12px; color: #8a8175; margin-left: 6px; }
+.ov-price.none strong { font: 13px Arial, sans-serif; letter-spacing: 2px; text-transform: uppercase; }
+
+/* ===== CARDÁPIOS ===== */
 .menu-block {
   background: white;
   border-radius: 8px;
@@ -259,33 +301,94 @@ body {
   align-items: center;
   gap: 20px;
   border-bottom: 1px solid #eee3d2;
-  padding-bottom: 14px;
-  margin-bottom: 6px;
+  padding-bottom: 18px;
 }
-.block-head h3 { font: 30px Georgia, serif; }
-.block-head h3 span {
+.block-head h2 { font: 32px Georgia, serif; }
+.block-head h2 span {
   display: block;
-  color: var(--gold);
+  color: var(--gold-dark);
   font: 11px Arial, sans-serif;
   letter-spacing: 4px;
   text-transform: uppercase;
   margin-bottom: 8px;
 }
+.price {
+  margin-left: auto;
+  text-align: right;
+  flex-shrink: 0;
+}
+.price span {
+  display: block;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #8a8175;
+}
+.price strong {
+  display: block;
+  font: 36px Georgia, serif;
+  color: var(--gold-dark);
+  line-height: 1.15;
+}
+.price em { display: block; font-style: normal; font-size: 13px; color: #777; }
+
+.menu-photo {
+  height: 240px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 24px;
+  background: var(--cream);
+}
+.menu-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: kenburns 16s ease-in-out infinite alternate;
+}
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.12) translate(-2%, -2%); } }
+
+.groups {
+  columns: 2 320px;
+  column-gap: 50px;
+  margin-top: 30px;
+}
+.group { break-inside: avoid; padding-bottom: 30px; }
+.group h3 {
+  color: var(--gold-dark);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-size: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee3d2;
+}
+.group .sub {
+  color: var(--gold-dark);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 18px 0 12px;
+}
+.pick {
+  display: inline-block;
+  background: var(--dark);
+  color: #f1d9a8;
+  font: 10px Arial, sans-serif;
+  letter-spacing: 1.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
 .menu-note {
-  color: #9a8f80;
+  color: #8a8175;
   font-size: 14px;
   font-style: italic;
-  margin: 14px 0 10px;
+  margin-top: 12px;
 }
-.menu-list {
-  list-style: none;
-  padding: 0;
-  columns: 2 300px;
-  column-gap: 50px;
-}
+.menu-list { list-style: none; padding: 0; }
 .menu-list li {
-  break-inside: avoid;
-  padding: 13px 0 13px 20px;
+  padding: 12px 0 12px 20px;
   border-bottom: 1px dashed #e6dfd3;
   line-height: 1.5;
   position: relative;
@@ -298,26 +401,13 @@ body {
   font-size: 9px;
   position: absolute;
   left: 0;
-  top: 18px;
+  top: 17px;
 }
 .menu-list li small {
   display: block;
-  color: #999;
+  color: #8a8175;
   font-size: 13px;
   margin-top: 3px;
-}
-.menu-sub-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 32px;
-  margin-top: 26px;
-}
-.menu-sub h4 {
-  color: var(--gold);
-  letter-spacing: 3px;
-  text-transform: uppercase;
-  font-size: 12px;
-  margin-bottom: 14px;
 }
 .chips {
   display: flex;
@@ -325,7 +415,9 @@ body {
   gap: 8px;
   list-style: none;
   padding: 0;
+  margin-top: 14px;
 }
+.sub + .chips { margin-top: 0; }
 .chips li {
   background: var(--cream);
   border: 1px solid #eee3d2;
@@ -335,30 +427,31 @@ body {
   transition: background .25s, transform .25s;
 }
 .chips li:hover { background: var(--gold); transform: translateY(-2px); }
-.menu-pair {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  max-width: 1100px;
-  margin: 0 auto;
-}
-.menu-pair .menu-block { margin: 0; }
-.menu-pair .menu-list { columns: 1; }
 
-/* fotos com movimento */
-.menu-photo {
-  height: 240px;
+.included {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+}
+.included li {
+  background: var(--cream);
+  border: 1px solid #eee3d2;
   border-radius: 6px;
-  overflow: hidden;
-  margin: 24px 0 8px;
+  padding: 16px 18px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #5c564d;
 }
-.menu-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: kenburns 16s ease-in-out infinite alternate;
+.included strong {
+  display: block;
+  color: var(--gold-dark);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
 }
-@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.12) translate(-2%, -2%); } }
 
 /* ===== RODAPÉ ===== */
 footer {
@@ -376,10 +469,12 @@ footer small { color: #888; }
 
 .js .reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s ease, transform .8s ease; }
 .js .reveal.visible { opacity: 1; transform: none; }
-.js .menu-list li, .js .chips li { opacity: 0; }
-.visible .menu-list li, .visible .chips li {
+.js .ov-card.reveal.visible { transition: opacity .8s ease, transform .3s ease, box-shadow .3s ease; }
+.js .ov-card.reveal.visible:hover { transform: translateY(-6px); }
+.js .group li { opacity: 0; }
+.group.visible li {
   animation: fadeUp .5s ease both;
-  animation-delay: calc(var(--i, 0) * 45ms);
+  animation-delay: calc(var(--i, 0) * 40ms);
 }
 
 /* ilustrações */
@@ -395,25 +490,36 @@ footer small { color: #888; }
 .menu-icon * { transform-box: fill-box; transform-origin: center; }
 @keyframes steam { 0% { opacity: 0; transform: translateY(4px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-8px); } }
 @keyframes twinkle { 0%,100% { transform: scale(.6) rotate(0); opacity: .5; } 50% { transform: scale(1.15) rotate(45deg); opacity: 1; } }
-@keyframes drip { 0% { transform: translateY(-4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateY(12px); opacity: 0; } }
-@keyframes sway { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 @keyframes bob { 0%,100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-6deg); } }
-@keyframes tilt { 0%,70%,100% { transform: rotate(0); } 35% { transform: rotate(15deg); } }
-@keyframes bubble { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-18px); opacity: 0; } }
+@keyframes tilt { 0%,70%,100% { transform: rotate(0); } 35% { transform: rotate(12deg); } }
 @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+@keyframes flicker { 0%,100% { transform: scale(1, 1); } 50% { transform: scale(.9, 1.25); } }
 .steam { animation: steam 2.4s ease-in-out infinite; }
 .twinkle { animation: twinkle 2.2s ease-in-out infinite; }
-.drip { animation: drip 1.8s ease-in infinite; }
-.sway { animation: sway 3s ease-in-out infinite; transform-origin: center bottom; }
 .bob { animation: bob 2.6s ease-in-out infinite; }
 .tilt { animation: tilt 3.2s ease-in-out infinite; transform-origin: center bottom; }
-.bubble { animation: bubble 2s ease-in infinite; }
 .float { animation: float 2.4s ease-in-out infinite; }
+.flicker { animation: flicker .9s ease-in-out infinite; transform-origin: center bottom; }
 .d1 { animation-delay: .6s; }
 .d2 { animation-delay: 1.2s; }
 
-@media (max-width: 760px) {
-  .menu-nav { justify-content: flex-start; }
+@media (max-width: 720px) {
+  .block-head { flex-wrap: wrap; }
+  .price {
+    width: 100%;
+    margin: 0;
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    padding: 12px 16px;
+    background: var(--cream);
+    border-radius: 6px;
+  }
+  .price strong { order: 1; font-size: 30px; }
+  .price span { order: 2; }
+  .price em { order: 3; width: 100%; }
 }
 @media (max-width: 600px) {
   :root { --nav-h: 58px; }
@@ -426,22 +532,22 @@ footer small { color: #888; }
   .cover p { font-size: 16px; }
   .cover-stats { margin-top: 30px; }
   .cover-stats div { padding: 14px 6px; }
-  .cover-stats strong { font-size: 26px; }
-  .cover-stats span { font-size: 9px; letter-spacing: 1px; }
+  .cover-stats strong { font-size: 28px; }
+  .cover-stats span { font-size: 10px; letter-spacing: 1px; }
   .scroll-cue { bottom: 30px; }
   .menu-nav { padding: 11px 16px; }
-  .menu-section { padding: 30px 16px 50px; }
+  .menu-section { padding: 40px 16px 50px; }
+  .overview h2 { font-size: 32px; }
   .menu-block { padding: 28px 20px; }
   .block-head { gap: 14px; }
-  .block-head h3 { font-size: 26px; }
-  .menu-pair { grid-template-columns: 1fr; }
+  .block-head h2 { font-size: 26px; }
   .menu-icon { width: 58px; height: 58px; padding: 6px; }
   .menu-photo { height: 180px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .js .reveal, .js .menu-list li, .js .chips li { opacity: 1; transform: none; }
+  .js .reveal, .js .group li { opacity: 1; transform: none; }
 }
 </style>
 <script>document.documentElement.classList.add('js');</script>
@@ -473,33 +579,639 @@ footer small { color: #888; }
     </svg>
     <div class="cover-logo logo" style="--d:.1s">SORELLY</div>
     <span class="eyebrow" style="--d:.2s">Crepe Francês • Sorocaba</span>
-    <h1 style="--d:.3s">Cardápio</h1>
-    <p style="--d:.45s">Crepes salgados e doces, saladas, patês, molhos e bebidas.</p>
+    <h1 style="--d:.3s">Cardápios</h1>
+    <p style="--d:.45s">Opções para o seu evento, com valores por pessoa.</p>
     <div class="cover-stats" style="--d:.6s">
-      <div><strong data-count="32">32</strong><span>Salgados</span></div>
-      <div><strong data-count="17">17</strong><span>Doces</span></div>
-      <div><strong data-count="20">20</strong><span>Itens de salada</span></div>
+      <div><strong data-count="8">8</strong><span>Cardápios</span></div>
+      <div><strong data-count="60" data-prefix="R$ ">R$ 60</strong><span>A partir de, por pessoa</span></div>
     </div>
   </div>
 
-  <a class="scroll-cue" href="#salgados"><i></i>Ver cardápio</a>
+  <a class="scroll-cue" href="#cardapios"><i></i>Ver cardápios</a>
 </header>
 
-<!-- ===== CATEGORIAS ===== -->
-<nav class="menu-nav" aria-label="Categorias do cardápio">
-  <a href="#salgados">Crepes Salgados</a>
-  <a href="#especiais">Salgados Especiais</a>
-  <a href="#doces">Crepes Doces</a>
-  <a href="#saladas">Saladas</a>
-  <a href="#pates">Patês</a>
-  <a href="#molhos">Molhos</a>
-  <a href="#bebidas">Bebidas</a>
+<!-- ===== CARDÁPIOS (MENU FIXO) ===== -->
+<nav class="menu-nav" aria-label="Cardápios">
+  <a href="#coquetel">Coquetel</a>
+  <a href="#boteco">Boteco</a>
+  <a href="#massa">Massa Show</a>
+  <a href="#pizzas">Pizzas</a>
+  <a href="#feijoada">Feijoada</a>
+  <a href="#churrasco-prata">Churrasco Prata</a>
+  <a href="#churrasco-ouro">Churrasco Ouro</a>
+  <a href="#crepe">Crepe Francês</a>
 </nav>
 
 <main class="menu-section">
 
-  <!-- Crepes Salgados -->
-  <section class="menu-block reveal" id="salgados">
+  <!-- ===== RESUMO ===== -->
+  <section class="overview" id="cardapios">
+    <span class="eyebrow">Sorelly</span>
+    <h2>Escolha o seu cardápio</h2>
+    <p>Toque em um cardápio para ver tudo o que ele inclui.</p>
+
+    <div class="ov-grid">
+      <a class="ov-card reveal" href="#coquetel">
+        <h3>Coquetel</h3>
+        <p>Salgadinhos, frituras, caldinho de feijão e espaguete em ramequins.</p>
+        <div class="ov-price"><strong>R$ 60,00</strong><span>por pessoa + R$ 3,00 por km</span></div>
+      </a>
+      <a class="ov-card reveal" href="#boteco">
+        <h3>Comida de Boteco</h3>
+        <p>Salgadinhos, frituras, carnes, caldinho de feijão e creme de polenta.</p>
+        <div class="ov-price"><strong>R$ 80,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#massa">
+        <h3>Massa Show</h3>
+        <p>3 massas, 6 ingredientes e 2 molhos à sua escolha.</p>
+        <div class="ov-price"><strong>R$ 80,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#pizzas">
+        <h3>Rodízio de Pizzas</h3>
+        <p>10 sabores salgados e 3 doces, com entrada e saladas.</p>
+        <div class="ov-price"><strong>R$ 80,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#feijoada">
+        <h3>Feijoada</h3>
+        <p>Quatro feijoadas, acompanhamentos, saladas e sobremesa.</p>
+        <div class="ov-price"><strong>R$ 100,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#churrasco-prata">
+        <h3>Churrasco Prata</h3>
+        <p>5 carnes, guarnições, saladas e sobremesa.</p>
+        <div class="ov-price"><strong>R$ 89,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#churrasco-ouro">
+        <h3>Churrasco Ouro</h3>
+        <p>11 carnes, incluindo picanha e costela, com mais entradas, saladas e guarnições.</p>
+        <div class="ov-price"><strong>R$ 112,00</strong><span>por pessoa</span></div>
+      </a>
+      <a class="ov-card reveal" href="#crepe">
+        <h3>Crepe Francês</h3>
+        <p>Crepes salgados, especiais e doces, saladas, patês e molhos.</p>
+        <div class="ov-price none"><strong>Ver sabores →</strong></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== COQUETEL ===================== -->
+  <section class="menu-block reveal" id="coquetel">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <g class="float"><path d="M24 18 C29 29 35 35 35 43 A11 11 0 0 1 13 43 C13 35 19 29 24 18 Z" fill="#e0a45a" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/></g>
+        <g class="float d1"><path d="M43 26 C47 34 52 39 52 45 A9 9 0 0 1 34 45 C34 39 39 34 43 26 Z" fill="#eebd7c" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/></g>
+        <path class="twinkle" d="M46 4 L48 9 L53 11 L48 13 L46 18 L44 13 L39 11 L44 9 Z" fill="#c49a61"/>
+      </svg>
+      <h2><span>Cardápio</span>Coquetel</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 60,00</strong><em>+ R$ 3,00 por km</em></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1674422753234-f2e1ce087e3a?auto=format&fit=crop&w=1400&q=80" alt="Bandeja de aperitivos" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entradas</h3>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela<small>Com torradinhas</small></li>
+          <li>Salada composta em taças<small>Molho parmesão</small></li>
+          <li>Caldinho de feijão com torresminho<small>Em ramequins</small></li>
+          <li>Espaguete à bolonhesa<small>Em ramequins</small></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Frituras</h3>
+        <ul class="menu-list">
+          <li>Fritas</li>
+          <li>Mini pizza de presunto e mussarela</li>
+          <li>Polenta frita</li>
+          <li>Mandioca frita</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Salgadinhos</h3>
+        <ul class="menu-list">
+          <li>Coxinha</li>
+          <li>Risoles</li>
+          <li>Bolinho de queijo</li>
+          <li>Bolinho de calabresa</li>
+          <li>Croquete de carne</li>
+          <li>Mini pastéis<small>Carne e queijo</small></li>
+          <li>Esfiha de carne</li>
+          <li>Esfiha de frango</li>
+          <li>Enroladinho de salsicha</li>
+          <li>Lanche de metro</li>
+          <li>Finger foods</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Sucos de laranja, uva e frutas. Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== BOTECO ===================== -->
+  <section class="menu-block reveal" id="boteco">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <g class="bob"><path d="M26 34 L21 11" stroke="#f3c766" stroke-width="5" stroke-linecap="round"/></g>
+        <path d="M32 34 L32 7" stroke="#eeb648" stroke-width="5" stroke-linecap="round"/>
+        <g class="bob d1"><path d="M38 34 L43 11" stroke="#f3c766" stroke-width="5" stroke-linecap="round"/></g>
+        <path d="M17 28 H47 L43 56 H21 Z" fill="#d9534f" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M24 38 H40" stroke="#f8f4ed" stroke-width="2" stroke-linecap="round" opacity=".7"/>
+      </svg>
+      <h2><span>Cardápio</span>Comida de Boteco</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 80,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=1400&q=80" alt="Cesta de batatas fritas" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entradas</h3>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela<small>Com torradinhas, nas mesas individuais</small></li>
+          <li>Salada composta em taças<small>Molho parmesão</small></li>
+          <li>Caldinho de feijão com torresminho</li>
+          <li>Creme de polenta mole com bacon</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Salgadinhos</h3>
+        <ul class="menu-list">
+          <li>Coxinha</li>
+          <li>Risoles</li>
+          <li>Bolinho de queijo</li>
+          <li>Mini pastéis<small>Carne e queijo</small></li>
+          <li>Mini lanchinho de carne maluca</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Frituras</h3>
+        <ul class="menu-list">
+          <li>Fritas</li>
+          <li>Fritas com bacon e cheddar</li>
+          <li>Anéis de cebola</li>
+          <li>Polenta frita</li>
+          <li>Mandioca frita</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Carnes</h3>
+        <ul class="menu-list">
+          <li>Isca de frango</li>
+          <li>Contrafilé</li>
+          <li>Calabresa acebolada</li>
+          <li>Frango à passarinho frito</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== MASSA SHOW ===================== -->
+  <section class="menu-block reveal" id="massa">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="steam" d="M24 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d1" d="M32 16 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d2" d="M40 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path d="M13 31 q4.5 -8 9.5 0 t9.5 0 t9.5 0 t9.5 0" fill="none" stroke="#f3c766" stroke-width="4" stroke-linecap="round"/>
+        <path d="M16 35 q4 -7 8 0 t8 0 t8 0 t8 0" fill="none" stroke="#eeb648" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="32" cy="27" r="3.5" fill="#d9534f"/>
+        <path d="M8 34 H56 Q54 54 32 54 Q10 54 8 34 Z" fill="#ffffff" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+      </svg>
+      <h2><span>Cardápio</span>Massa Show</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 80,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1776810250123-119d15036790?auto=format&fit=crop&w=1400&q=80" alt="Penne ao molho de tomate" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Massas <span class="pick">Escolha 3</span></h3>
+        <ul class="chips">
+          <li>Talharim</li>
+          <li>Espaguete</li>
+          <li>Penne</li>
+          <li>Ravióli de carne</li>
+          <li>Ravióli de frango</li>
+          <li>Ravióli 3 queijos</li>
+          <li>Nhoque</li>
+          <li>Conchiglia</li>
+          <li>Conchiglione</li>
+          <li>Fusilli</li>
+          <li>Parafuso</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Molhos <span class="pick">Escolha 2</span></h3>
+        <ul class="chips">
+          <li>Vermelho ao sugo</li>
+          <li>Branco</li>
+          <li>Bechamel</li>
+          <li>4 queijos</li>
+          <li>Alfredo</li>
+          <li>Alho e óleo</li>
+          <li>Pesto com pinoli</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Ingredientes <span class="pick">Escolha 6</span></h3>
+        <ul class="chips">
+          <li>Frango desfiado</li>
+          <li>Alcatra com barbecue</li>
+          <li>Calabresa</li>
+          <li>Carne moída</li>
+          <li>Bacon</li>
+          <li>Presunto em cubos</li>
+          <li>Peito de peru</li>
+          <li>Queijo mussarela</li>
+          <li>Tomate</li>
+          <li>Tomate seco</li>
+          <li>Cebola</li>
+          <li>Milho</li>
+          <li>Ervilha</li>
+          <li>Cenoura</li>
+          <li>Pimentão</li>
+          <li>Brócolis</li>
+          <li>Rúcula</li>
+          <li>Acelga</li>
+          <li>Escarola refogada</li>
+          <li>Creme de espinafre</li>
+          <li>Shimeji</li>
+          <li>Shiitake</li>
+          <li>Champignon</li>
+          <li>Alho frito</li>
+          <li>Cheiro-verde</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Recheios especiais</h3>
+        <p class="menu-note">Acrescenta R$ 3,00 por recheio e por pessoa.</p>
+        <ul class="chips">
+          <li>Camarão</li>
+          <li>Bobó de camarão</li>
+          <li>Carne seca</li>
+          <li>Mignon</li>
+          <li>Presunto Parma</li>
+          <li>Fiambre</li>
+          <li>Surimi (kani-kama)</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Acompanhamentos</h3>
+        <ul class="menu-list">
+          <li>Arroz branco</li>
+          <li>Salada verde e outra composta</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Sobremesa</h3>
+        <ul class="menu-list">
+          <li>Salada de frutas com sorvete de creme</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== RODÍZIO DE PIZZAS ===================== -->
+  <section class="menu-block reveal" id="pizzas">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <g class="tilt">
+          <path d="M12 16 Q32 8 52 16 L32 58 Z" fill="#f3c766" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 16 Q32 8 52 16" fill="none" stroke="#c98f4b" stroke-width="5" stroke-linecap="round"/>
+          <circle cx="25" cy="25" r="3.5" fill="#d9534f"/>
+          <circle cx="38" cy="27" r="3.5" fill="#d9534f"/>
+          <circle cx="31" cy="39" r="3" fill="#d9534f"/>
+          <circle cx="32" cy="20" r="1.6" fill="#7fa652"/>
+          <circle cx="34" cy="33" r="1.6" fill="#7fa652"/>
+        </g>
+      </svg>
+      <h2><span>Cardápio</span>Rodízio de Pizzas</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 80,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1400&q=80" alt="Pizza" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entrada</h3>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela<small>Com torradinhas, nas mesas individuais</small></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Saladas</h3>
+        <ul class="menu-list">
+          <li>Salada verde e outra composta</li>
+        </ul>
+        <p class="sub">Molhos <span class="pick">Escolha 2</span></p>
+        <ul class="chips">
+          <li>Italiano</li>
+          <li>Rosé</li>
+          <li>Limão e azeite</li>
+          <li>Caesar</li>
+          <li>Parmesão</li>
+          <li>Mostarda com mel</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Pizzas doces</h3>
+        <ul class="menu-list">
+          <li>Brigadeiro</li>
+          <li>Chocolate com morango</li>
+          <li>Chocolate branco, maçã e pera com coco branco</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Pizzas salgadas</h3>
+        <ul class="menu-list">
+          <li>Frango, milho e catupiry</li>
+          <li>Frango, queijo e bacon</li>
+          <li>Calabresa, tomate e cebola</li>
+          <li>Calabresa, tomate, queijo e cebola</li>
+          <li>4 queijos</li>
+          <li>Marguerita</li>
+          <li>Portuguesa</li>
+          <li>Baiana<small>Com pimenta calabresa</small></li>
+          <li>Napolitana</li>
+          <li>Brócolis com bacon</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== FEIJOADA ===================== -->
+  <section class="menu-block reveal" id="feijoada">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="steam" d="M24 20 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d1" d="M32 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path class="steam d2" d="M40 20 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
+        <path d="M12 37 H5 M52 37 H59" stroke="#c49a61" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M12 30 H52 V40 Q52 56 32 56 Q12 56 12 40 Z" fill="#5a3a28" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
+        <ellipse cx="32" cy="30" rx="20" ry="5" fill="#2e1d14" stroke="#c49a61" stroke-width="2"/>
+        <circle cx="25" cy="30" r="1.7" fill="#8a5a3c"/>
+        <circle cx="33" cy="31.5" r="1.7" fill="#8a5a3c"/>
+        <circle cx="40" cy="29.5" r="1.7" fill="#8a5a3c"/>
+      </svg>
+      <h2><span>Cardápio</span>Feijoada</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 100,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.pexels.com/photos/34442361/pexels-photo-34442361.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Feijoada servida na panela, com arroz" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entrada</h3>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela<small>Com torradinhas, nas mesas individuais</small></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Saladas</h3>
+        <ul class="menu-list">
+          <li>Salada verde e outra composta</li>
+        </ul>
+        <p class="sub">Molhos <span class="pick">Escolha 2</span></p>
+        <ul class="chips">
+          <li>Italiano</li>
+          <li>Rosé</li>
+          <li>Limão e azeite</li>
+          <li>Caesar</li>
+          <li>Parmesão</li>
+          <li>Mostarda com mel</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Feijoadas</h3>
+        <ul class="menu-list">
+          <li>Feijoada completa</li>
+          <li>Feijoada light</li>
+          <li>Feijoada composta de embutidos</li>
+          <li>Cassoulet<small>Feijoada branca</small></li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Acompanhamentos</h3>
+        <ul class="menu-list">
+          <li>Torresmo</li>
+          <li>Vinagrete</li>
+          <li>Farofa</li>
+          <li>Ovos fritos</li>
+          <li>Bistecas ou linguiças goianas<small>Menos gordura</small></li>
+          <li>Banana à milanesa</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Sobremesa</h3>
+        <ul class="menu-list">
+          <li>Salada de frutas com leite condensado e sorvete<small>Ou doce de abóbora com coco e sorvete</small></li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== CHURRASCO PRATA ===================== -->
+  <section class="menu-block reveal" id="churrasco-prata">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="flicker" d="M26 60 C19 60 18 52 24 46 C24 50 27 50 27 45 C32 49 35 55 31 59 C30 60 28 60 26 60 Z" fill="#e8833a"/>
+        <path class="flicker d1" d="M41 60 C36 60 35 54 39 50 C39 53 41 53 41 49 C45 52 47 56 44 59 C43 60 42 60 41 60 Z" fill="#f0b94f"/>
+        <path d="M8 41 L57 9" stroke="#b8bcc0" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M18.3 34.6 L25.6 29.8" stroke="#8a4b32" stroke-width="10"/>
+        <path d="M27.5 28.6 L34.8 23.8" stroke="#b5533c" stroke-width="10"/>
+        <path d="M36.7 22.6 L44 17.8" stroke="#8a4b32" stroke-width="10"/>
+        <path class="twinkle" d="M14 6 L15.5 10.5 L20 12 L15.5 13.5 L14 18 L12.5 13.5 L8 12 L12.5 10.5 Z" fill="#a9adb2"/>
+      </svg>
+      <h2><span>Cardápio</span>Churrasco Prata</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 89,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1558030137-a56c1b004fa3?auto=format&fit=crop&w=1400&q=80" alt="Carne na grelha" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entradas</h3>
+        <p class="menu-note">Com torradinhas, nas mesas individuais.</p>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela</li>
+          <li>Antepasto de abobrinha</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Saladas</h3>
+        <ul class="menu-list">
+          <li>Salada verde e outra composta</li>
+        </ul>
+        <p class="sub">Molhos <span class="pick">Escolha 2</span></p>
+        <ul class="chips">
+          <li>Italiano</li>
+          <li>Rosé</li>
+          <li>Limão e azeite</li>
+          <li>Caesar</li>
+          <li>Parmesão</li>
+          <li>Mostarda com mel</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Carnes</h3>
+        <ul class="menu-list">
+          <li>Linguiça</li>
+          <li>Frango</li>
+          <li>Maminha</li>
+          <li>Fraldinha</li>
+          <li>Contrafilé</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Guarnições</h3>
+        <ul class="menu-list">
+          <li>Arroz branco</li>
+          <li>Vinagrete</li>
+          <li>Maionese</li>
+          <li>Farofa</li>
+          <li>Pão de alho</li>
+        </ul>
+        <p class="sub">Feijão <span class="pick">Escolha 1</span></p>
+        <ul class="chips">
+          <li>Feijão gordo</li>
+          <li>Tutu de feijão mole</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Sobremesa</h3>
+        <ul class="menu-list">
+          <li>Salada de frutas com sorvete de creme e coberturas</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== CHURRASCO OURO ===================== -->
+  <section class="menu-block reveal" id="churrasco-ouro">
+    <div class="block-head">
+      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
+        <path class="flicker" d="M26 60 C19 60 18 52 24 46 C24 50 27 50 27 45 C32 49 35 55 31 59 C30 60 28 60 26 60 Z" fill="#e8833a"/>
+        <path class="flicker d1" d="M41 60 C36 60 35 54 39 50 C39 53 41 53 41 49 C45 52 47 56 44 59 C43 60 42 60 41 60 Z" fill="#f0b94f"/>
+        <path d="M8 41 L57 9" stroke="#b8bcc0" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M18.3 34.6 L25.6 29.8" stroke="#8a4b32" stroke-width="10"/>
+        <path d="M27.5 28.6 L34.8 23.8" stroke="#b5533c" stroke-width="10"/>
+        <path d="M36.7 22.6 L44 17.8" stroke="#8a4b32" stroke-width="10"/>
+        <path class="twinkle" d="M14 6 L15.5 10.5 L20 12 L15.5 13.5 L14 18 L12.5 13.5 L8 12 L12.5 10.5 Z" fill="#d9a441"/>
+        <path class="twinkle d2" d="M54 30 L55.2 33.8 L59 35 L55.2 36.2 L54 40 L52.8 36.2 L49 35 L52.8 33.8 Z" fill="#d9a441"/>
+      </svg>
+      <h2><span>Cardápio</span>Churrasco Ouro</h2>
+      <div class="price"><span>Por pessoa</span><strong>R$ 112,00</strong></div>
+    </div>
+    <div class="menu-photo">
+      <img src="https://images.unsplash.com/photo-1614119068601-483274e9dcb7?auto=format&fit=crop&w=1400&q=80" alt="Carne selada sobre a brasa" loading="lazy">
+    </div>
+    <div class="groups">
+      <div class="group">
+        <h3>Entradas</h3>
+        <p class="menu-note">Com torradinhas, nas mesas individuais.</p>
+        <ul class="menu-list">
+          <li>Patê de antepasto de berinjela</li>
+          <li>Antepasto de abobrinha</li>
+          <li>Patê de tomate seco com ricota</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Saladas</h3>
+        <ul class="menu-list">
+          <li>Salada verde e outra composta</li>
+          <li>Salada de legumes cozidos</li>
+          <li>Repolho com abacaxi</li>
+          <li>Tabule</li>
+        </ul>
+        <p class="sub">Molhos <span class="pick">Escolha 2</span></p>
+        <ul class="chips">
+          <li>Italiano</li>
+          <li>Rosé</li>
+          <li>Limão e azeite</li>
+          <li>Caesar</li>
+          <li>Parmesão</li>
+          <li>Mostarda com mel</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Guarnições</h3>
+        <ul class="menu-list">
+          <li>Arroz branco</li>
+          <li>Vinagrete</li>
+          <li>Vinagrete de manga</li>
+          <li>Maionese</li>
+          <li>Farofa</li>
+          <li>Pão de alho</li>
+          <li>Caponata de macarrão</li>
+        </ul>
+        <p class="sub">Feijão <span class="pick">Escolha 1</span></p>
+        <ul class="chips">
+          <li>Feijão gordo</li>
+          <li>Tutu de feijão mole</li>
+          <li>Feijão cearense</li>
+          <li>Feijão tropeiro</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Carnes</h3>
+        <ul class="menu-list">
+          <li>Linguiça</li>
+          <li>Frango</li>
+          <li>Maminha</li>
+          <li>Fraldinha</li>
+          <li>Panceta ou pernil assado na mostarda</li>
+          <li>Contrafilé</li>
+          <li>Picanha</li>
+          <li>Steak house</li>
+          <li>Entrecôte</li>
+          <li>Dok ribs</li>
+          <li>Costela</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Sobremesa</h3>
+        <ul class="menu-list">
+          <li>Salada de frutas com sorvete de creme, mini churros recheados e coberturas</li>
+        </ul>
+      </div>
+    </div>
+    <ul class="included">
+      <li><strong>Bebidas</strong>Refrigerantes das linhas Coca-Cola e Antarctica, refrigerantes zero, água com gás e natural, e suco Del Valle de laranja e uva.</li>
+      <li><strong>Saída de café</strong>Com petit fours e chocolate.</li>
+      <li><strong>Incluso</strong>Todo o material necessário (pratos, talheres, réchauds etc.) e os profissionais.</li>
+    </ul>
+  </section>
+
+  <!-- ===================== CREPE FRANCÊS ===================== -->
+  <section class="menu-block reveal" id="crepe">
     <div class="block-head">
       <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
         <path class="steam" d="M24 18 q-3 -4 0 -8 q3 -4 0 -8" fill="none" stroke="#c49a61" stroke-width="2" stroke-linecap="round"/>
@@ -510,120 +1222,81 @@ footer small { color: #888; }
         <circle cx="27" cy="41" r="2.2" fill="#d9534f"/>
         <circle cx="36" cy="39" r="2.2" fill="#7fa652"/>
       </svg>
-      <h3><span>Crepes</span>Crepes Salgados</h3>
-    </div>
-    <div class="menu-photo">
-      <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=1400&q=80" alt="Crepe salgado" loading="lazy">
-    </div>
-    <p class="menu-note">Todos acompanham queijo mussarela.</p>
-    <ul class="menu-list">
-      <li>Calabresa com tomate, mussarela e orégano</li>
-      <li>Calabresa com tomate, mussarela, orégano e cebola</li>
-      <li>Frango com catupiry e mussarela<small>Com brócolis ou milho</small></li>
-      <li>Frango com champignon ao molho bechamel e parmesão</li>
-      <li>Frango com creme de milho e provolone<small>Ou parmesão</small></li>
-      <li>Frango com creme de milho ao molho bechamel e mussarela</li>
-      <li>Frango ao curry, catupiry, passas e maçã</li>
-      <li>Gorgonzola com pera e mel</li>
-      <li>Quatro queijos com manjericão</li>
-      <li>Queijo minas, tomate seco e castanha</li>
-      <li>Queijo minas, tomate e orégano</li>
-      <li>Mussarela, rúcula e tomate seco</li>
-      <li>Catupiry, palmito e tomate seco</li>
-      <li>Escarola, bacon e mussarela</li>
-      <li>Escarola e mussarela ao molho bechamel</li>
-      <li>Suflê de escarola, mussarela e parmesão</li>
-      <li>Creme de espinafre com bacon</li>
-      <li>Brócolis, bacon, mussarela e catupiry</li>
-      <li>Presunto, mussarela, tomate e orégano</li>
-    </ul>
-  </section>
-
-  <!-- Salgados Especiais -->
-  <section class="menu-block reveal" id="especiais">
-    <div class="block-head">
-      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M19 47 Q32 36 45 47" fill="none" stroke="#c49a61" stroke-width="1.5"/>
-        <path d="M28 40 q4 -6 8 0" fill="none" stroke="#e8833a" stroke-width="3" stroke-linecap="round"/>
-        <path class="twinkle" d="M50 4 L52.5 9.5 L58 12 L52.5 14.5 L50 20 L47.5 14.5 L42 12 L47.5 9.5 Z" fill="#c49a61"/>
-        <path class="twinkle d2" d="M14 12 L15.5 16.5 L20 18 L15.5 19.5 L14 24 L12.5 19.5 L8 18 L12.5 16.5 Z" fill="#c49a61"/>
-      </svg>
-      <h3><span>Crepes</span>Salgados Especiais</h3>
-    </div>
-    <ul class="menu-list">
-      <li>Alcatra ou maminha com molho barbecue</li>
-      <li>Peito de peru, mussarela e cenoura<small>Ou presunto</small></li>
-      <li>Shimeji, mussarela e mostarda francesa</li>
-      <li>Shimeji, presunto, mussarela e molho bechamel</li>
-      <li>Shimeji com mussarela e tomate seco</li>
-      <li>Camarão ao molho Sorelly</li>
-      <li>Camarão ao molho bechamel</li>
-      <li>Camarão com abóbora e queijo parmesão</li>
-      <li>Carne seca com banana e catupiry<small>Ou mussarela</small></li>
-      <li>Carne seca com abóbora e catupiry</li>
-      <li>Escondidinho de carne seca com purê de mandioca</li>
-      <li>Strogonoff de carne bovina</li>
-      <li>Strogonoff de frango</li>
-    </ul>
-  </section>
-
-  <!-- Crepes Doces -->
-  <section class="menu-block reveal" id="doces">
-    <div class="block-head">
-      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-        <path class="drip" d="M29 6 q3 5 0 7 q-3 -2 0 -7 Z" fill="#6b4226"/>
-        <path class="drip d1" d="M36 8 q3 5 0 7 q-3 -2 0 -7 Z" fill="#6b4226"/>
-        <path d="M10 50 L32 22 L54 50 Q32 58 10 50 Z" fill="#f1d9a8" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
-        <path d="M18 44 q3 -3 6 0 t6 0 t6 0 t6 0" fill="none" stroke="#6b4226" stroke-width="2.5" stroke-linecap="round"/>
-        <g class="float">
-          <path d="M48 22 q6 0 6 6 q-2 6 -6 8 q-4 -2 -6 -8 q0 -6 6 -6 Z" fill="#d9534f"/>
-          <path d="M45 22 l3 -3 l3 3" fill="none" stroke="#7fa652" stroke-width="2" stroke-linecap="round"/>
-        </g>
-      </svg>
-      <h3><span>Crepes</span>Crepes Doces</h3>
+      <h2><span>Cardápio</span>Crepe Francês</h2>
     </div>
     <div class="menu-photo">
       <img src="https://images.unsplash.com/photo-1519676867240-f03562e64548?auto=format&fit=crop&w=1400&q=80" alt="Crepe doce" loading="lazy">
     </div>
-    <ul class="menu-list">
-      <li>Chocolate com castanha</li>
-      <li>Chocolate com morango</li>
-      <li>Brigadeiro com morango</li>
-      <li>Nutella com maçã e canela</li>
-      <li>Chocolate branco com nozes e maçã</li>
-      <li>Chocolate branco com maçã e banana</li>
-      <li>Chocolate branco com pera</li>
-      <li>Geleia de laranja com chocolate branco</li>
-      <li>Mel com nozes</li>
-      <li>Suzete<small>Geleia de laranja ou suco de limão flambado ao Cointreau — ou geleia de pera flambada ao Cointreau com castanhas e passas</small></li>
-      <li>Doce de leite com castanha</li>
-      <li>Goiabada com queijo fresco</li>
-      <li>Banana com canela</li>
-      <li>Abacaxi flambado ao rum</li>
-      <li>Beijinho</li>
-      <li>Prestígio<small>Chocolate, coco ralado e leite condensado</small></li>
-      <li>Creme de amendoim</li>
-    </ul>
-  </section>
-
-  <!-- Saladas -->
-  <section class="menu-block reveal" id="saladas">
-    <div class="block-head">
-      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-        <g class="sway"><ellipse cx="22" cy="26" rx="7" ry="12" fill="#7fa652" transform="rotate(-25 22 26)"/></g>
-        <g class="sway d1"><ellipse cx="32" cy="22" rx="6" ry="13" fill="#9cc26a"/></g>
-        <g class="sway d2"><ellipse cx="42" cy="26" rx="7" ry="12" fill="#6c9445" transform="rotate(25 42 26)"/></g>
-        <circle cx="27" cy="32" r="4" fill="#d9534f"/>
-        <circle cx="39" cy="31" r="3.5" fill="#e8833a"/>
-        <path d="M8 34 H56 Q54 54 32 54 Q10 54 8 34 Z" fill="#ffffff" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
-      </svg>
-      <h3><span>Monte a sua</span>Saladas</h3>
-    </div>
-    <p class="menu-note">Escolha seus ingredientes favoritos.</p>
-    <div class="menu-sub-grid">
-      <div class="menu-sub">
-        <h4>Folhas</h4>
+    <div class="groups">
+      <div class="group">
+        <h3>Crepes salgados</h3>
+        <p class="menu-note">Todos acompanham queijo mussarela.</p>
+        <ul class="menu-list">
+          <li>Calabresa com tomate, mussarela e orégano</li>
+          <li>Calabresa com tomate, mussarela, orégano e cebola</li>
+          <li>Frango com catupiry e mussarela<small>Com brócolis ou milho</small></li>
+          <li>Frango com champignon ao molho bechamel e parmesão</li>
+          <li>Frango com creme de milho e provolone<small>Ou parmesão</small></li>
+          <li>Frango com creme de milho ao molho bechamel e mussarela</li>
+          <li>Frango ao curry, catupiry, passas e maçã</li>
+          <li>Gorgonzola com pera e mel</li>
+          <li>Quatro queijos com manjericão</li>
+          <li>Queijo minas, tomate seco e castanha</li>
+          <li>Queijo minas, tomate e orégano</li>
+          <li>Mussarela, rúcula e tomate seco</li>
+          <li>Catupiry, palmito e tomate seco</li>
+          <li>Escarola, bacon e mussarela</li>
+          <li>Escarola e mussarela ao molho bechamel</li>
+          <li>Suflê de escarola, mussarela e parmesão</li>
+          <li>Creme de espinafre com bacon</li>
+          <li>Brócolis, bacon, mussarela e catupiry</li>
+          <li>Presunto, mussarela, tomate e orégano</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Salgados especiais</h3>
+        <ul class="menu-list">
+          <li>Alcatra ou maminha com molho barbecue</li>
+          <li>Peito de peru, mussarela e cenoura<small>Ou presunto</small></li>
+          <li>Shimeji, mussarela e mostarda francesa</li>
+          <li>Shimeji, presunto, mussarela e molho bechamel</li>
+          <li>Shimeji com mussarela e tomate seco</li>
+          <li>Camarão ao molho Sorelly</li>
+          <li>Camarão ao molho bechamel</li>
+          <li>Camarão com abóbora e queijo parmesão</li>
+          <li>Carne seca com banana e catupiry<small>Ou mussarela</small></li>
+          <li>Carne seca com abóbora e catupiry</li>
+          <li>Escondidinho de carne seca com purê de mandioca</li>
+          <li>Strogonoff de carne bovina</li>
+          <li>Strogonoff de frango</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Crepes doces</h3>
+        <ul class="menu-list">
+          <li>Chocolate com castanha</li>
+          <li>Chocolate com morango</li>
+          <li>Brigadeiro com morango</li>
+          <li>Nutella com maçã e canela</li>
+          <li>Chocolate branco com nozes e maçã</li>
+          <li>Chocolate branco com maçã e banana</li>
+          <li>Chocolate branco com pera</li>
+          <li>Geleia de laranja com chocolate branco</li>
+          <li>Mel com nozes</li>
+          <li>Suzete<small>Geleia de laranja ou suco de limão flambado ao Cointreau — ou geleia de pera flambada ao Cointreau com castanhas e passas</small></li>
+          <li>Doce de leite com castanha</li>
+          <li>Goiabada com queijo fresco</li>
+          <li>Banana com canela</li>
+          <li>Abacaxi flambado ao rum</li>
+          <li>Beijinho</li>
+          <li>Prestígio<small>Chocolate, coco ralado e leite condensado</small></li>
+          <li>Creme de amendoim</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Saladas</h3>
+        <p class="menu-note">Monte a sua com os ingredientes favoritos.</p>
+        <p class="sub">Folhas</p>
         <ul class="chips">
           <li>Alface americana</li>
           <li>Alface crespa</li>
@@ -631,9 +1304,7 @@ footer small { color: #888; }
           <li>Rúcula</li>
           <li>Acelga fatiada</li>
         </ul>
-      </div>
-      <div class="menu-sub">
-        <h4>Legumes</h4>
+        <p class="sub">Legumes</p>
         <ul class="chips">
           <li>Pepino</li>
           <li>Brócolis japonês</li>
@@ -644,107 +1315,63 @@ footer small { color: #888; }
           <li>Tomate seco</li>
           <li>Palmito</li>
         </ul>
-      </div>
-      <div class="menu-sub">
-        <h4>Complementos</h4>
+        <p class="sub">Complementos</p>
         <ul class="chips">
           <li>Mussarela de búfala ralada</li>
           <li>Kani</li>
           <li>Presunto fatiado</li>
           <li>Batata palha</li>
         </ul>
-      </div>
-      <div class="menu-sub">
-        <h4>Frutas</h4>
+        <p class="sub">Frutas</p>
         <ul class="chips">
           <li>Manga</li>
           <li>Kiwi</li>
           <li>Carambola</li>
         </ul>
+        <p class="sub">Molhos</p>
+        <ul class="chips">
+          <li>Parmesão</li>
+          <li>Mostarda francesa</li>
+          <li>Shoyu</li>
+          <li>Limão e azeite</li>
+          <li>Italiano</li>
+          <li>Rosé</li>
+          <li>Caesar</li>
+          <li>Mostarda e mel</li>
+          <li>Iogurte e ervas</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Patês e antepastos</h3>
+        <ul class="menu-list">
+          <li>Antepasto de berinjela</li>
+          <li>Patê de ricota com tomate seco<small>Opcional: salsinha e cebolinha</small></li>
+          <li>Patê de requeijão com brócolis<small>Ou catupiry</small></li>
+          <li>Patê de azeitona preta<small>Ou de ervas</small></li>
+          <li>Patê de peito de peru com ricota</li>
+          <li>Patê de presunto com cream cheese</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3>Bebidas</h3>
+        <ul class="menu-list">
+          <li>Coca-Cola e Coca-Cola Zero</li>
+          <li>Guaraná e Guaraná Zero</li>
+          <li>Sprite e Sprite Zero</li>
+          <li>Água com e sem gás</li>
+        </ul>
       </div>
     </div>
   </section>
-
-  <!-- Patês -->
-  <section class="menu-block reveal" id="pates">
-    <div class="block-head">
-      <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-        <path d="M18 29 H46 V50 Q46 55 41 55 H23 Q18 55 18 50 Z" fill="#f8f4ed" stroke="#c49a61" stroke-width="2"/>
-        <rect x="21" y="33" width="22" height="18" rx="2" fill="#e9c9a0"/>
-        <rect x="16" y="23" width="32" height="7" rx="2" fill="#c49a61"/>
-        <g class="bob">
-          <path d="M10 8 L20 13" stroke="#34312c" stroke-width="5" stroke-linecap="round"/>
-          <path d="M20 13 L42 18" stroke="#b8bcc0" stroke-width="4" stroke-linecap="round"/>
-          <circle cx="42" cy="18" r="3" fill="#e9c9a0"/>
-        </g>
-      </svg>
-      <h3><span>Para acompanhar</span>Patês e Antepastos</h3>
-    </div>
-    <ul class="menu-list">
-      <li>Antepasto de berinjela</li>
-      <li>Patê de ricota com tomate seco<small>Opcional: salsinha e cebolinha</small></li>
-      <li>Patê de requeijão com brócolis<small>Ou catupiry</small></li>
-      <li>Patê de azeitona preta<small>Ou de ervas</small></li>
-      <li>Patê de peito de peru com ricota</li>
-      <li>Patê de presunto com cream cheese</li>
-    </ul>
-  </section>
-
-  <!-- Molhos + Bebidas -->
-  <div class="menu-pair">
-    <section class="menu-block reveal" id="molhos">
-      <div class="block-head">
-        <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-          <g class="tilt">
-            <rect x="28" y="8" width="8" height="10" rx="1" fill="#c49a61"/>
-            <path d="M24 18 H40 Q44 22 44 28 V52 Q44 56 40 56 H24 Q20 56 20 52 V28 Q20 22 24 18 Z" fill="#ffffff" stroke="#c49a61" stroke-width="2"/>
-            <rect x="22" y="32" width="20" height="12" rx="1" fill="#f1d9a8"/>
-          </g>
-          <path class="drip" d="M52 20 q3 5 0 7 q-3 -2 0 -7 Z" fill="#e8833a"/>
-        </svg>
-        <h3><span>Para a salada</span>Molhos</h3>
-      </div>
-      <ul class="menu-list">
-        <li>Parmesão</li>
-        <li>Mostarda francesa</li>
-        <li>Shoyu</li>
-        <li>Limão e azeite</li>
-        <li>Italiano</li>
-        <li>Rosé</li>
-        <li>Caesar</li>
-        <li>Mostarda e mel</li>
-        <li>Iogurte e ervas</li>
-      </ul>
-    </section>
-
-    <section class="menu-block reveal" id="bebidas">
-      <div class="block-head">
-        <svg class="menu-icon" viewBox="0 0 64 64" aria-hidden="true">
-          <path d="M38 4 L34 40" stroke="#d9534f" stroke-width="3" stroke-linecap="round"/>
-          <path d="M19.5 28 H44.5 L42 56 H22 Z" fill="#6b3a22" opacity=".85"/>
-          <circle class="bubble" cx="27" cy="50" r="1.6" fill="#ffffff"/>
-          <circle class="bubble d1" cx="32" cy="52" r="1.3" fill="#ffffff"/>
-          <circle class="bubble d2" cx="37" cy="49" r="1.6" fill="#ffffff"/>
-          <path d="M18 16 H46 L42 56 H22 Z" fill="none" stroke="#c49a61" stroke-width="2" stroke-linejoin="round"/>
-        </svg>
-        <h3><span>Para refrescar</span>Bebidas</h3>
-      </div>
-      <ul class="menu-list">
-        <li>Coca-Cola e Coca-Cola Zero</li>
-        <li>Guaraná e Guaraná Zero</li>
-        <li>Sprite e Sprite Zero</li>
-        <li>Água com e sem gás</li>
-      </ul>
-    </section>
-  </div>
 
 </main>
 
 <footer>
   <div class="logo">SORELLY</div>
   <p>Crepe Francês em Sorocaba</p>
-  <p>Rua Nelson Antunes Gatto, 147</p>
+  <p>Rua Yukio Sugui, 37, Santa Madre Paulina</p>
   <p>(15) 98800-7612</p>
+  <p>CNPJ 52.163.340/0001-37</p>
   <p><small>© Sorelly. Todos os direitos reservados.</small></p>
 </footer>
 
@@ -760,19 +1387,19 @@ footer small { color: #888; }
   // números da capa contando
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('[data-count]').forEach(function (el) {
-      var end = +el.dataset.count, start = null, dur = 1400;
-      el.textContent = '0';
+      var end = +el.dataset.count, prefix = el.dataset.prefix || '', start = null, dur = 1400;
+      el.textContent = prefix + '0';
       function step(t) {
         if (!start) start = t;
         var p = Math.min((t - start) / dur, 1);
-        el.textContent = Math.round(end * (1 - Math.pow(1 - p, 3)));
+        el.textContent = prefix + Math.round(end * (1 - Math.pow(1 - p, 3)));
         if (p < 1) requestAnimationFrame(step);
       }
       setTimeout(function () { requestAnimationFrame(step); }, 700);
     });
   }
 
-  var reveals = document.querySelectorAll('.reveal');
+  var reveals = document.querySelectorAll('.reveal, .group');
   var nav = document.querySelector('.menu-nav');
   var links = nav.querySelectorAll('a');
 
@@ -789,10 +1416,10 @@ footer small { color: #888; }
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.03, rootMargin: '0px 0px -40px 0px' });
   reveals.forEach(function (el) { io.observe(el); });
 
-  // destaca a categoria que está na tela
+  // destaca o cardápio que está na tela
   var spy = new IntersectionObserver(function (entries) {
     entries.forEach(function (entry) {
       if (!entry.isIntersecting) return;
